@@ -1,0 +1,21 @@
+# Büyük veri dosyaları
+*.zip
+*.csv
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Geçici dosyalar
+*.tmp
+*.log
+
+# IDE dosyaları
+.vscode/
+.idea/
+
+# OS dosyaları
+.DS_Store
+Thumbs.db
