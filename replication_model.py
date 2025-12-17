@@ -1,4 +1,20 @@
 
+"""
+STRICT REPLICATION MODEL (PAPER VERIFICATION)
+=============================================
+This script runs the original Medeiros et al. (2021) methodology on their specific
+test period (1990-2015) using a Strict Recursive Walk-Forward approach.
+
+Purpose:
+    To prove that our code base can reproduce the paper's reported RMSE (~0.42%)
+    when using identical data and time horizons, confirming correctness.
+
+Usage:
+    python replication_model.py
+
+Output:
+    Prints validation metrics (RMSE, Ratio to Random Walk, etc.)
+"""
 import pandas as pd
 import numpy as np
 from sklearn.ensemble import RandomForestRegressor

@@ -1,4 +1,18 @@
 
+"""
+USER BEST MODEL (OPTIMIZED + SMART INJECTION)
+=============================================
+This script runs the State-of-the-Art inflation forecasting model developed in this project.
+It combines:
+1. An Optimized Random Forest (300 estimators, Depth 20)
+2. A "Smart Regime Injection" mechanism to capture volatility
+
+Usage:
+    python user_best_model.py
+
+Output:
+    Prints RMSE results and saves 'regime_experiment_results.csv'
+"""
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
