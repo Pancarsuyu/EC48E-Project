@@ -55,7 +55,13 @@ We use the FRED-MD dataset (127 macro variables).
 - **Transformations:** All variables are stationarized (diff, log-diff, pct_change) based on the McCracken & Ng (2016) codes.
 - **Dimensionality Reduction:**
   - Paper Method: PCA (4 factors).
-  - User Method: The Base Model uses 4 Principal Components + 4 Lags of Inflation + Raw Stress Indicators (optional in extended versions).
+  - User Method: **High-Dimensional Feature Space.**
+    - We generate a rich set of features for *all* 127 macro variables, including:
+      - **Stationary Transforms:** 1-month, 3-month, and 12-month percentage changes.
+      - **Rolling Statistics:** Volatility, Momentum, and Moving Averages windowed over 3, 6, and 12 months.
+      - **Regime Indicators:** Z-Scores and Outlier Flags for key variables (Oil, VIX).
+    - **Total Features:** >500 inputs.
+    - **Selection:** The Random Forest model (Depth 20) performs implicit feature selection, identifying the most predictive signals from this expanded set.
 
 ## 5. Why It Works Better
 
