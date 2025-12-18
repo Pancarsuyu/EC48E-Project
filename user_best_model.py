@@ -96,7 +96,9 @@ def load_and_transform_user_style(file_path):
     df_raw = fe.load_and_prepare_data(file_path)
     df_features = fe.get_all_stationary_features(df_raw)
     df_features['target_inflation'] = df_raw['inflation_rate']
-    df_final = df_features.replace([np.inf, -np.inf], np.nan).dropna()
+    df_final = df_features.replace([np.inf, -np.inf], np.nan)
+    # Robust handling: Drop first 12 rows (lags/rolling), then fill remaining NaNs with 0
+    df_final = df_final.iloc[12:].fillna(0)
     return df_final
 
 def find_regime_shock(current_features, historical_features_db, historical_target_db, feature_cols, top_k=7):
@@ -196,10 +198,10 @@ def run_improved_experiment():
     # 1. Load Data
     try:
         df_user = load_and_transform_user_style(DATA_PATH)
-        # We also load paper data just to align index correctly to 1959-2025 common set
-        df_paper_temp = load_and_transform_paper_style(DATA_PATH)
-        common_index = df_user.index.intersection(df_paper_temp.index)
-        df_user = df_user.loc[common_index]
+        
+        # NOTE: Intersection with 'paper' data REMOVED to avoid unnecessary truncation.
+        # df_user is robust and complete (800+ rows).
+        
     except Exception as e:
         print(f"Error: {e}")
         return
